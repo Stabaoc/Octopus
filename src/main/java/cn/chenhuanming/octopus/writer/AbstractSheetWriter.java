@@ -2,7 +2,6 @@ package cn.chenhuanming.octopus.writer;
 
 
 import cn.chenhuanming.octopus.config.Config;
-import cn.chenhuanming.octopus.config.ConfigFactory;
 import cn.chenhuanming.octopus.config.Field;
 import cn.chenhuanming.octopus.formatter.Formatter;
 import cn.chenhuanming.octopus.model.CellPosition;
@@ -24,12 +23,12 @@ import java.util.Date;
  */
 @Slf4j
 public abstract class AbstractSheetWriter<T> implements SheetWriter<T> {
-    protected ConfigFactory configFactory;
+    protected Config config;
     protected HeaderWriter headerWriter;
     protected CellPosition startPoint;
 
-    public AbstractSheetWriter(ConfigFactory configFactory, HeaderWriter headerWriter, CellPosition startPoint) {
-        this.configFactory = configFactory;
+    public AbstractSheetWriter(Config config, HeaderWriter headerWriter, CellPosition startPoint) {
+        this.config = config;
         this.headerWriter = headerWriter;
         this.startPoint = startPoint;
     }
@@ -39,8 +38,6 @@ public abstract class AbstractSheetWriter<T> implements SheetWriter<T> {
         if (!canWrite(sheet, data)) {
             return CellUtils.POSITION_ZERO_ZERO;
         }
-
-        Config config = configFactory.getConfig();
 
         Class dataType = data.iterator().next().getClass();
         if (config.getClassType() != dataType) {
@@ -95,7 +92,7 @@ public abstract class AbstractSheetWriter<T> implements SheetWriter<T> {
             return col + 1;
         }
 
-        Formatter formatter = configFactory.getConfig().getFormatterContainer().get(field.getPicker().getReturnType());
+        Formatter formatter = this.config.getFormatterContainer().get(field.getPicker().getReturnType());
 
         if (field.getPicker().getReturnType() == String.class || formatter == null) {
             value = ReflectionUtils.invokeReadMethod(field.getPicker(), o, field.getDefaultValue());

@@ -2,7 +2,7 @@ package cn.chenhuanming.octopus.example;
 
 import cn.chenhuanming.octopus.Octopus;
 import cn.chenhuanming.octopus.config.ConfigFactory;
-import cn.chenhuanming.octopus.config.XmlConfigFactory;
+import cn.chenhuanming.octopus.config.XMLConfigFactory;
 import cn.chenhuanming.octopus.entity.Address;
 import cn.chenhuanming.octopus.entity.Company;
 import cn.chenhuanming.octopus.model.CheckedData;
@@ -52,7 +52,7 @@ public class CompanyExample {
         ConfigFactory configFactory = Octopus.getXMLConfigFactory(is);
 
         try {
-            Octopus.writeOneSheet(os, configFactory, "company", companies);
+            Octopus.writeOneSheet(os, configFactory.getConfig(), "company", companies);
         } catch (IOException e) {
             System.out.println("export failed");
         }
@@ -70,7 +70,7 @@ public class CompanyExample {
         ConfigFactory configFactory = Octopus.getXMLConfigFactory(is);
 
         try {
-            Octopus.writeOneSheet(os, configFactory, "company2", companies);
+            Octopus.writeOneSheet(os, configFactory.getConfig(), "company2", companies);
         } catch (IOException e) {
             System.out.println("export failed");
         }
@@ -81,7 +81,7 @@ public class CompanyExample {
         FileInputStream fis = new FileInputStream(rootPath + "/company2.xlsx");
 
         try {
-            SheetReader<Company> importData = Octopus.readFirstSheet(fis, configFactory, new DefaultCellPosition(1, 0));
+            SheetReader<Company> importData = Octopus.readFirstSheet(fis, configFactory.getConfig(), new DefaultCellPosition(1, 0));
 
             for (Company company : importData) {
                 System.out.println(company);
@@ -95,9 +95,9 @@ public class CompanyExample {
     public void importCheckedData() throws IOException, InvalidFormatException {
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("wrongCompany.xlsx");
 
-        ConfigFactory configFactory = new XmlConfigFactory(this.getClass().getClassLoader().getResourceAsStream("company3.xml"));
+        ConfigFactory configFactory = new XMLConfigFactory(this.getClass().getClassLoader().getResourceAsStream("company3.xml"));
 
-        final SheetReader<CheckedData<Company>> sheetReader = Octopus.readFirstSheetWithValidation(is, configFactory, new DefaultCellPosition(1, 0));
+        final SheetReader<CheckedData<Company>> sheetReader = Octopus.readFirstSheetWithValidation(is, configFactory.getConfig(), new DefaultCellPosition(1, 0));
 
         for (CheckedData<Company> checkedData : sheetReader) {
             System.out.println(checkedData);

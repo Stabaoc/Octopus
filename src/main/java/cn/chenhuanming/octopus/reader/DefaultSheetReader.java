@@ -1,7 +1,7 @@
 package cn.chenhuanming.octopus.reader;
 
 
-import cn.chenhuanming.octopus.config.ConfigFactory;
+import cn.chenhuanming.octopus.config.Config;
 import cn.chenhuanming.octopus.config.Field;
 import cn.chenhuanming.octopus.exception.ParseException;
 import cn.chenhuanming.octopus.formatter.Formatter;
@@ -23,8 +23,8 @@ import java.util.Date;
 @Slf4j
 public class DefaultSheetReader<T> extends AbstractSheetReader<T> {
 
-    public DefaultSheetReader(Sheet sheet, ConfigFactory configFactory, CellPosition startPoint) {
-        super(sheet, configFactory, startPoint);
+    public DefaultSheetReader(Sheet sheet, Config config, CellPosition startPoint) {
+        super(sheet, config, startPoint);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class DefaultSheetReader<T> extends AbstractSheetReader<T> {
                 Cell cell = sheet.getRow(row).getCell(col);
                 String str;
                 if (CellUtils.isDate(cell)) {
-                    Formatter<Date> dateFormatter = configFactory.getConfig().getFormatterContainer().get(Date.class);
+                    Formatter<Date> dateFormatter = config.getFormatterContainer().get(Date.class);
                     str = dateFormatter.format(DateUtil.getJavaDate(cell.getNumericCellValue()));
                 } else {
                     str = CellUtils.getCellValue(sheet, row, col, field.getDefaultValue());

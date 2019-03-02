@@ -27,9 +27,9 @@ import java.util.regex.Pattern;
  * Created at 2018/12/10
  */
 @Slf4j
-public class XmlConfigFactory extends AbstractXMLConfigFactory {
+public class XMLConfigFactory extends AbstractXMLConfigFactory {
 
-    public XmlConfigFactory(InputStream is) {
+    public XMLConfigFactory(InputStream is) {
         super(is);
     }
 
@@ -138,10 +138,9 @@ public class XmlConfigFactory extends AbstractXMLConfigFactory {
         if (!StringUtils.isEmpty(name)) {
             field.setName(name);
         }
+
         String desc = getAttribute(node, XMLConstant.Field.Attribute.DESCRIPTION);
-        if (!StringUtils.isEmpty(desc)) {
-            field.setDescription(desc);
-        }
+        field.setDescription(StringUtils.defaultIfEmpty(desc, ""));
 
         String dateFormat = getAttribute(node, XMLConstant.Field.Attribute.DATE_FORMAT);
         if (!StringUtils.isEmpty(dateFormat)) {

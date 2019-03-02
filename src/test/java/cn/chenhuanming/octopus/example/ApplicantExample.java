@@ -20,6 +20,6 @@ public class ApplicantExample extends AbstractWriterTest {
 
         ConfigFactory configFactory = Octopus.getXMLConfigFactory(this.getClass().getClassLoader().getResourceAsStream("applicants.xml"));
 
-        Octopus.writeOneSheet(os, configFactory, "test", applicantsList);
+        Octopus.writeOneSheet(os, configFactory.getConfig(), "test", applicantsList);
     }
 }

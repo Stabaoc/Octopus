@@ -1,7 +1,7 @@
 package cn.chenhuanming.octopus.core;
 
 import cn.chenhuanming.octopus.config.ConfigFactory;
-import cn.chenhuanming.octopus.config.XmlConfigFactory;
+import cn.chenhuanming.octopus.config.XMLConfigFactory;
 import cn.chenhuanming.octopus.model.DefaultCellPosition;
 import cn.chenhuanming.octopus.writer.DefaultHeaderWriter;
 import cn.chenhuanming.octopus.writer.HeaderWriter;
@@ -27,7 +27,7 @@ public class SupportFieldWriterTest {
 
         HeaderWriter headerWriter = new DefaultHeaderWriter();
 
-        ConfigFactory configFactory = new XmlConfigFactory(this.getClass().getClassLoader().getResourceAsStream("applicants.xml"));
+        ConfigFactory configFactory = new XMLConfigFactory(this.getClass().getClassLoader().getResourceAsStream("applicants.xml"));
 
         headerWriter.drawHeader(workbook.createSheet(), new DefaultCellPosition(0, 0), configFactory.getConfig().getFields());
 
