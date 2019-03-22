@@ -49,8 +49,8 @@
 
     <xs:attributeGroup name="fieldAttributes">
         <xs:attribute name="font-size" type="xs:positiveInteger" default="14"/>
-        <xs:attribute name="foreground-color" type="color" default="#FFFFFF"/>
-        <xs:attribute name="color" type="color" default="#000000"/>
+        <xs:attribute name="foreground-color" type="color"/>
+        <xs:attribute name="color" type="color"/>
         <xs:attribute name="is-bold" type="xs:boolean" default="false"/>
         <xs:attribute name="border" type="border" default="0,0,0,0"/>
         <xs:attribute name="border-color" type="borderColor"/>
@@ -82,7 +82,7 @@
     </xs:simpleType>
     <xs:simpleType name="borderColor">
         <xs:restriction base="xs:string">
-            <xs:pattern value="(#[0-9a-f]{6})?,(#[0-9a-f]{6})?,(#[0-9a-f]{6})?,(#[0-9a-f]{6})?"/>
+            <xs:pattern value="(#[0-9a-fA-F]{6})?,(#[0-9a-fA-F]{6})?,(#[0-9a-fA-F]{6})?,(#[0-9a-fA-F]{6})?"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="border">

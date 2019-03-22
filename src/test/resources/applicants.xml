@@ -13,7 +13,7 @@
            border="0,2,0,2"
            border-color=",#4242f4,,#4242f4"/>
 
-    <Header name="job" description="Job" header-color="#4286f4">
+    <Header name="job" description="Job" header-color="#4286F4">
         <Header name="company"
                 description="Company Name">
             <Field name="name" description="Company Name"/>
